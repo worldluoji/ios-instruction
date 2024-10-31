@@ -25,6 +25,11 @@
                 window.webkit.messageHandlers.callbackHandler.postMessage(message);
             }
         })
+
+        function handleNativeMessage(message) {
+            console.log("Received message from native: " + message);
+            return 'JavaScript OK';
+        }
         
     </script>
 </body>

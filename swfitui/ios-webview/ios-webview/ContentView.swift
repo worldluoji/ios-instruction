@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var message: String?
-    
     var body: some View {
         VStack {
             if let message = message {

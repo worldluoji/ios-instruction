@@ -46,5 +46,16 @@ struct WebView: UIViewRepresentable {
                 parent.message = messageBody
             }
         }
+        
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {
+            // 页面加载完成后执行 JavaScript 代码
+            webView.evaluateJavaScript("handleNativeMessage('Hello from Native')", completionHandler: { result, error in
+                if let error = error {
+                    print("Error: \(error)")
+                } else {
+                    print("Result: \(result ?? "")")
+                }
+            })
+        }
     }
 }
