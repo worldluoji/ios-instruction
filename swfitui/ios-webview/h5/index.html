@@ -10,6 +10,7 @@
     <div>
         <input type="text" placeholder="请输入message" id="messageInput" />
         <button id="sendBtn">发送</button>
+        <button id="urlSchemeBtn">触发URLScheme</button>
     </div>
     <script>
         
@@ -24,6 +25,12 @@
                 }
                 window.webkit.messageHandlers.callbackHandler.postMessage(message);
             }
+        })
+
+        let urlSchemeBtn = document.getElementById('urlSchemeBtn');
+        urlSchemeBtn.addEventListener('click', () => {
+            const url = 'customeschemetest://test.com?param1=luoji&param2=test';
+            window.location.href = url;
         })
 
         function handleNativeMessage(message) {

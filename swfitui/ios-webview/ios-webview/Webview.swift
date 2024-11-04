@@ -57,5 +57,20 @@ struct WebView: UIViewRepresentable {
                 }
             })
         }
+        
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            if let url = navigationAction.request.url, url.scheme == "customeschemetest" {
+                // 处理自定义URL Scheme
+                if let host = url.host, let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems {
+                    // 根据host和queryItems进行逻辑处理
+                    print("Host: \(host), Query Items: \(queryItems)")
+                    // 你可以在这里更新parent的message绑定变量
+                    parent.message = "Received from H5: \(url.absoluteString)"
+                }
+                decisionHandler(.cancel)  // 取消导航，因为我们已经处理了这个URL
+            } else {
+                decisionHandler(.allow)  // 允许其他URL加载
+            }
+        }
     }
 }
